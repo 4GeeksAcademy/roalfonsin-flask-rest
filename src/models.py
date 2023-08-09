@@ -21,14 +21,14 @@ class User(db.Model):
 class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    birth_year = db.Column(db.Integer)
+    birth_year = db.Column(db.String(64))
     gender = db.Column(db.String(64))
     height = db.Column(db.Integer)
     skin_color = db.Column(db.String(120))
     eye_color = db.Column(db.String(120))
 
     def __repr__(self):
-        return '<People %r>' % self.id
+        return '<People %r>' % self.name
 
     def serialize(self):
         return {
@@ -52,7 +52,7 @@ class Planets(db.Model):
     gravity = db.Column(db.String(120))
 
     def __repr__(self):
-        return '<Planets %r>' % self.id
+        return '<Planets %r>' % self.name
 
     def serialize(self):
         return {
