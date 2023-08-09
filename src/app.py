@@ -39,12 +39,16 @@ def sitemap():
 @app.route('/user', methods=['GET'])
 def handle_user():
     all_users_query = User.query.all()
+    if all_users_query is None:
+        raise APIException('We have no users', 404)
     response_body = [repr(user) for user in all_users_query]
     return jsonify(response_body), 200
 
 @app.route('/user/<int:user_id>', methods=['GET'])
 def handle_one_user(user_id):
     user_query = User.query.filter_by(id = user_id)
+    if user_query is None:
+        raise APIException('User not found', 404)
     response_body = user_query[0].serialize()
     return jsonify(response_body), 200
 
@@ -57,24 +61,32 @@ def handle_favorites(current_user_id):
 @app.route('/people', methods=['GET'])
 def handle_people():
     all_people_query = People.query.all()
+    if all_people_query is None:
+        raise APIException('We have no people', 404)
     response_body = [repr(person) for person in all_people_query]
     return jsonify(response_body), 200
 
 @app.route('/people/<int:people_id>', methods=['GET'])
 def handle_person(people_id):
     person_query = People.query.filter_by(id = people_id)
+    if person_query is None:
+        raise APIException('Person not found', 404)
     response_body = person_query[0].serialize()
     return jsonify(response_body), 200
 
 @app.route('/planets', methods=['GET'])
 def handle_planets():
     all_planets_query = Planets.query.all()
+    if all_planets_query is None:
+        raise APIException('We have no planets', 404)
     response_body = [repr(planet) for planet in all_planets_query]
     return jsonify(response_body), 200
 
 @app.route('/planets/<int:planet_id>', methods=['GET'])
 def handle_planet(planet_id):
     planet_query = Planets.query.filter_by(id = planet_id)
+    if planet_query is None:
+        raise APIException('Planet not found', 404)
     response_body = planet_query[0].serialize()
     return jsonify(response_body), 200
 
