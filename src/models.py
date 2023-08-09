@@ -28,7 +28,7 @@ class People(db.Model):
     eye_color = db.Column(db.String(120))
 
     def __repr__(self):
-        return '<People %r>' % self.name
+        return f"id: {self.id}, name: {self.name}"
 
     def serialize(self):
         return {
@@ -52,7 +52,7 @@ class Planets(db.Model):
     gravity = db.Column(db.String(120))
 
     def __repr__(self):
-        return '<Planets %r>' % self.name
+        return f"id: {self.id}, name: {self.name}"
 
     def serialize(self):
         return {
