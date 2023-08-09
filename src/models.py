@@ -17,3 +17,51 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+    
+class People(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    birth_year = db.Column(db.Integer)
+    gender = db.Column(db.String(64))
+    height = db.Column(db.Integer)
+    skin_color = db.Column(db.String(120))
+    eye_color = db.Column(db.String(120))
+
+    def __repr__(self):
+        return '<People %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "birth_year": self.birth_year,
+            "gender": self.gender,
+            "height": self.height,
+            "skin_color": self.skin_color,
+            "eye_color": self.eye_color,
+            # do not serialize the password, its a security breach
+        }
+    
+class Planets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    diameter = db.Column(db.Integer)
+    orbital_period = db.Column(db.Integer)
+    climate = db.Column(db.String(120))
+    terrain = db.Column(db.String(120))
+    gravity = db.Column(db.String(120))
+
+    def __repr__(self):
+        return '<Planets %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "diameter": self.diameter,
+            "orbital_period": self.orbital_period,
+            "climate": self.climate,
+            "terrain": self.terrain,
+            "gravity": self.gravity,
+            # do not serialize the password, its a security breach
+        }
