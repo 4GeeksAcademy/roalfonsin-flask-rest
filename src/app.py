@@ -39,42 +39,56 @@ def sitemap():
 @app.route('/user', methods=['GET'])
 def handle_user():
     all_users_query = User.query.all()
+    if len(list(all_users_query)) == 0:
+        raise APIException('We have no users', 400)
     response_body = [repr(user) for user in all_users_query]
     return jsonify(response_body), 200
 
 @app.route('/user/<int:user_id>', methods=['GET'])
 def handle_one_user(user_id):
     user_query = User.query.filter_by(id = user_id)
+    if len(list(user_query)) == 0:
+        raise APIException('User not found', 400)
     response_body = user_query[0].serialize()
     return jsonify(response_body), 200
 
 @app.route('/user/<int:current_user_id>/favorites', methods=['GET'])
 def handle_favorites(current_user_id):
     favorites_query = Favorites.query.filter_by(user_id = current_user_id)
+    if len(list(favorites_query)) == 0:
+        raise APIException('This user has no favorites or user does not exist', 400)
     response_body = [favorite.serialize() for favorite in favorites_query]
     return jsonify(response_body), 200
 
 @app.route('/people', methods=['GET'])
 def handle_people():
     all_people_query = People.query.all()
+    if len(list(all_people_query)) == 0:
+        raise APIException('We have no people', 400)
     response_body = [repr(person) for person in all_people_query]
     return jsonify(response_body), 200
 
 @app.route('/people/<int:people_id>', methods=['GET'])
 def handle_person(people_id):
     person_query = People.query.filter_by(id = people_id)
+    if len(list(person_query)) == 0:
+        raise APIException('Person not found', 400)
     response_body = person_query[0].serialize()
     return jsonify(response_body), 200
 
 @app.route('/planets', methods=['GET'])
 def handle_planets():
     all_planets_query = Planets.query.all()
+    if len(list(all_planets_query)) == 0:
+        raise APIException('We have no planets', 400)
     response_body = [repr(planet) for planet in all_planets_query]
     return jsonify(response_body), 200
 
 @app.route('/planets/<int:planet_id>', methods=['GET'])
 def handle_planet(planet_id):
     planet_query = Planets.query.filter_by(id = planet_id)
+    if len(list(planet_query)) == 0:
+        raise APIException('Planet not found', 400)
     response_body = planet_query[0].serialize()
     return jsonify(response_body), 200
 
