@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
@@ -21,7 +21,7 @@ class User(db.Model):
         }
     
 class People(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     birth_year = db.Column(db.String(64))
     gender = db.Column(db.String(64))
@@ -45,7 +45,7 @@ class People(db.Model):
         }
     
 class Planets(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     diameter = db.Column(db.Integer)
     orbital_period = db.Column(db.Integer)
@@ -69,7 +69,7 @@ class Planets(db.Model):
         }
     
 class Favorites(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
     planets_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
